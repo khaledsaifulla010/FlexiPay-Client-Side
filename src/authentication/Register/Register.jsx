@@ -4,7 +4,8 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const Register = () => {
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
@@ -30,8 +31,11 @@ const Register = () => {
     // Create User //
     const newPin = "0" + data.pin;
     createUser(data.email, newPin).then((result) => {
-      const user = result.user;
-      console.log(user);
+      // const user = result.user;
+      toast.success("Register Successfully!", {
+        position: "top-right",
+        theme: "colored",
+      });
       return updateUserProfile(data.fullName);
     });
   };

@@ -4,7 +4,8 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const Login = () => {
   const [pin, setPin] = useState(["", "", "", "", ""]);
   const [showPin, setShowPin] = useState(false);
@@ -30,10 +31,20 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const newPin = "0" + data.pin;
-    loginUser(data.email, newPin).then((result) => {
-      console.log(result.user);
-      redirects("/");
-    });
+    loginUser(data.email, newPin)
+      .then((result) => {
+        toast.success("Login Successfully", {
+          position: "top-right",
+          theme: "colored",
+        });
+        redirects("/");
+      })
+      .catch((error) => {
+        toast.error("Something Went Wrong!", {
+          position: "top-right",
+          theme: "colored",
+        });
+      });
   };
   return (
     <div className="bg-white min-h-screen flex flex-col items-center">
