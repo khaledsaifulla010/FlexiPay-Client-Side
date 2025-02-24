@@ -1,12 +1,25 @@
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import AuthContext from "./AuthContext";
+import auth from "../firebase/firebase.config";
 
 const AuthProvider = ({ children }) => {
-  const user = {
-    name: "Khaled",
+  // Register With Email & Pin //
+
+  const createUser = (email, pin) => {
+    return createUserWithEmailAndPassword(auth, email, pin);
+  };
+
+  // Update User Profile //
+
+  const updateUserProfile = (name) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+    });
   };
 
   const authInfo = {
-    user,
+    createUser,
+    updateUserProfile,
   };
 
   return (

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,7 +26,13 @@ const Register = () => {
   };
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
+    // Create User //
+    const newPin = "0" + data.pin;
+    createUser(data.email, newPin).then((result) => {
+      const user = result.user;
+      console.log(user);
+      return updateUserProfile(data.fullName);
+    });
   };
 
   return (
