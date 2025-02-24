@@ -1,3 +1,6 @@
+import { FaHandPointRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div className="text-white font-1">
@@ -9,9 +12,9 @@ const Home = () => {
         inquiries with a secure, user-friendly experience. Enjoy seamless
         digital transactions anytime, anywhere!
       </p>
-      <button className="mt-8 p-2 border rounded-md font-bold text-lg ml-[700px] bg-indigo-800 border-indigo-500 cursor-pointer">
-        Get Started
-      </button>
+      <Link className="w-36 mt-8 p-2 border rounded-md font-bold text-lg ml-[700px] bg-indigo-800 border-indigo-700 cursor-pointer flex items-center justify-center gap-1.5">
+        Get Started <FaHandPointRight />
+      </Link>
     </div>
   );
 };
