@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [showPin, setShowPin] = useState(false);
@@ -187,11 +188,19 @@ const Register = () => {
               )}
             </div>
           </div>
-
+          <h3>
+            Have an account?{" "}
+            <Link
+              to="/login"
+              className="font-bold text-base text-purple-600 underline"
+            >
+              Login
+            </Link>{" "}
+          </h3>
           {/* Submit Button */}
           <button
             type="submit"
-            className="text-lg font-bold p-2 border rounded-md bg-green-200 text-green-800 border-green-300 w-full"
+            className="text-lg font-bold p-2 border rounded-md bg-blue-600 text-white border-blue-600 w-full cursor-pointer"
           >
             Sign Up
           </button>
