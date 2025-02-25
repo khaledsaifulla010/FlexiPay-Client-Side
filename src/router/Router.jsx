@@ -5,6 +5,7 @@ import Register from "../authentication/Register/Register";
 import Login from "../authentication/Login/Login";
 import UserLayout from "../layout/UserLayout/UserLayout";
 import UserHome from "../pages/UserAccount/userHome/userHome";
+import SendMoney from "../pages/UserAccount/SendMoney/SendMoney";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "userHome",
         element: <UserHome />,
+      },
+      {
+        path: "sendMoney",
+        element: <SendMoney />,
       },
     ],
   },

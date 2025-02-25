@@ -23,7 +23,7 @@ const UserLayout = () => {
           Cash In
         </NavLink>
         <NavLink
-          to="userHome"
+          to="sendMoney"
           className="flex items-center font-bold text-2xl gap-1.5 ml-20"
         >
           <FaMoneyBillTransfer />
