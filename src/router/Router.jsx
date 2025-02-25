@@ -7,6 +7,7 @@ import UserLayout from "../layout/UserLayout/UserLayout";
 import UserHome from "../pages/UserAccount/userHome/userHome";
 import SendMoney from "../pages/UserAccount/SendMoney/SendMoney";
 import Notifications from "../pages/UserAccount/Notifications/Notifications";
+import CashOut from "../pages/UserAccount/CashOut/CashOut";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "notifications",
         element: <Notifications />,
+      },
+      {
+        path: "cashOut",
+        element: <CashOut />,
       },
     ],
   },

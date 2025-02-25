@@ -27,7 +27,6 @@ const UserLayout = () => {
     });
   };
 
-  
   return (
     <div className="flex w-full font-2 text-white">
       {/* Side Content */}
@@ -46,13 +45,7 @@ const UserLayout = () => {
           <MdNotificationsActive />
           Notifications({unreadCount > 0 ? unreadCount : 0})
         </NavLink>
-        <NavLink
-          to="userHome"
-          className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-        >
-          <TbFolderDollar />
-          Cash In
-        </NavLink>
+
         <NavLink
           to="sendMoney"
           className="flex items-center font-bold text-2xl gap-1.5 ml-20"
@@ -62,6 +55,13 @@ const UserLayout = () => {
         </NavLink>
         <NavLink
           to="userHome"
+          className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+        >
+          <TbFolderDollar />
+          Cash In
+        </NavLink>
+        <NavLink
+          to="cashOut"
           className="flex items-center font-bold text-2xl gap-1.5 ml-20"
         >
           <FaHandHoldingDollar />
