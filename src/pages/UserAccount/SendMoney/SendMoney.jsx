@@ -6,7 +6,7 @@ import { IoEye, IoWallet } from "react-icons/io5";
 import useAuth from "../../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { useOutletContext } from "react-router-dom";
+import useUser from "../../../hooks/useUser";
 const SendMoney = () => {
   const {
     register,
@@ -15,9 +15,9 @@ const SendMoney = () => {
     reset,
     formState: { errors },
   } = useForm();
-
   const { user } = useAuth();
-  const { balance, setBalance } = useOutletContext();
+  const [users, refetch] = useUser();
+  const newBalance = users.myBalance;
 
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
@@ -51,13 +51,11 @@ const SendMoney = () => {
     }
 
     // Added Transaction Fee //
-
     const transactionFee = amount > 100 ? 5 : 0;
     const totalDeduction = amount + transactionFee;
 
     // We Check The Balance Sufficient //
-
-    if (totalDeduction > balance) {
+    if (totalDeduction > newBalance) {
       toast.error("Insufficient balance!", {
         position: "top-right",
         theme: "colored",
@@ -66,27 +64,29 @@ const SendMoney = () => {
     }
 
     const sendMoney = {
+      senderId: users._id,
       sender: user?.displayName,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
-      transactionFee: transactionFee,
       transactionId: transactionId(),
+      date: new Date(),
     };
 
     axios
       .post("http://localhost:5000/sendMoney", sendMoney)
       .then((res) => {
-        if (res.data.insertedId) {
-          // Show New Balance after Transaction //
-          setBalance((previousBalance) => previousBalance - totalDeduction);
-          reset();
-          toast.success("Send Money Successfully!", {
+        if (res.data.success) {
+          refetch();
+
+          toast.success("Transaction Successful!", {
             position: "top-right",
             theme: "colored",
           });
+
+          reset();
         }
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Something Went Wrong!", {
           position: "top-right",
           theme: "colored",
@@ -151,7 +151,7 @@ const SendMoney = () => {
             <div>
               <h1 className="font-bold text-lg flex items-center gap-2">
                 Available Balance : <IoWallet />
-                {balance} Tk{" "}
+                {newBalance} Tk{" "}
               </h1>
             </div>
 

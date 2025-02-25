@@ -6,17 +6,26 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useUser from "../../hooks/useUser";
+import useSendMoney from "../../hooks/useSendMoney";
 const Register = () => {
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
   const { createUser, updateUserProfile } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm();
+  const [users] = useUser();
+  const [sendMoney, totalAmount] = useSendMoney();
+
+  const initialTotalAMount = totalAmount || 0;
+  const initialMyBalance = users.myBalance || 0;
+  const newBalance = initialMyBalance + initialTotalAMount;
 
   // PIN Change & Join it //
   const handlePinChange = (index, value) => {
@@ -33,21 +42,20 @@ const Register = () => {
     const newPin = "0" + data.pin;
     createUser(data.email, newPin).then((result) => {
       const user = result.user;
-      toast.success("Register Successfully!", {
-        position: "top-right",
-        theme: "colored",
-      });
+
+      const balance = data.accountType === "User" ? 40 + newBalance : 100000;
 
       const newUser = {
         name: data.fullName,
         email: user.email,
         mobileNumber: Number(data.mobileNumber),
         accountType: data.accountType,
+        myBalance: balance,
         nid: data.nid,
       };
 
-      axios
-        .post("http://localhost:5000/users", newUser)
+      axiosSecure
+        .post("/users", newUser)
         .then((res) => {
           if (res.data.insertedId) {
             toast.success("Register Successfully!", {

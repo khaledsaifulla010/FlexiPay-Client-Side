@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import AuthContext from "./AuthContext";
@@ -43,12 +44,20 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  // Logout User //
+
+  const logoutUser = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
   const authInfo = {
     createUser,
     updateUserProfile,
     user,
     loading,
     loginUser,
+    logoutUser,
   };
 
   return (

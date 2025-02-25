@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 const Login = () => {
   const [pin, setPin] = useState(["", "", "", "", ""]);
   const [showPin, setShowPin] = useState(false);
-  const redirects = useNavigate();
   const { loginUser } = useAuth();
+   const redirect = useNavigate();
 
   const {
     register,
@@ -33,11 +33,12 @@ const Login = () => {
     const newPin = "0" + data.pin;
     loginUser(data.email, newPin)
       .then((result) => {
+        redirect("/user/userHome");
         toast.success("Login Successfully", {
           position: "top-right",
           theme: "colored",
         });
-        redirects("/");
+        
       })
       .catch((error) => {
         toast.error("Something Went Wrong!", {

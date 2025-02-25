@@ -1,11 +1,27 @@
-import { useState } from "react";
-import { FaHandHoldingDollar, FaMoneyBillTransfer } from "react-icons/fa6";
+import {
+  FaCircleRight,
+  FaHandHoldingDollar,
+  FaMoneyBillTransfer,
+} from "react-icons/fa6";
 import { RiHome9Fill } from "react-icons/ri";
 import { TbFolderDollar } from "react-icons/tb";
-import { NavLink, Outlet } from "react-router-dom";
-
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const UserLayout = () => {
-  const [balance, setBalance] = useState(5000.31);
+  const { logoutUser } = useAuth();
+  const redirect = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      redirect("/login");
+      toast.success("Successfully Logged Out !", {
+        position: "top-right",
+        theme: "colored",
+      });
+    });
+  };
 
   return (
     <div className="flex w-full font-2 text-white">
@@ -39,11 +55,18 @@ const UserLayout = () => {
           <FaHandHoldingDollar />
           Cash Out
         </NavLink>
+        <button
+          onClick={handleLogout}
+          className="flex items-center font-bold text-2xl gap-1.5 ml-20 cursor-pointer"
+        >
+          <FaCircleRight />
+          Sign Out
+        </button>
       </div>
 
       {/* Main Content */}
       <div className="w-full border border-green-700  bg-[#212121]">
-        <Outlet context={{ balance, setBalance }} />
+        <Outlet />
       </div>
     </div>
   );
