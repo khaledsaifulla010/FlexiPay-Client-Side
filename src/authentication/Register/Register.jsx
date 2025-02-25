@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import axios from "axios";
 const Register = () => {
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
@@ -31,11 +32,37 @@ const Register = () => {
     // Create User //
     const newPin = "0" + data.pin;
     createUser(data.email, newPin).then((result) => {
-      // const user = result.user;
+      const user = result.user;
       toast.success("Register Successfully!", {
         position: "top-right",
         theme: "colored",
       });
+
+      const newUser = {
+        name: data.fullName,
+        email: user.email,
+        mobileNumber: Number(data.mobileNumber),
+        accountType: data.accountType,
+        nid: data.nid,
+      };
+
+      axios
+        .post("http://localhost:5000/users", newUser)
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success("Register Successfully!", {
+              position: "top-right",
+              theme: "colored",
+            });
+          }
+        })
+        .catch((error) => {
+          toast.error("Something Went Wrong!", {
+            position: "top-right",
+            theme: "colored",
+          });
+        });
+
       return updateUserProfile(data.fullName);
     });
   };
