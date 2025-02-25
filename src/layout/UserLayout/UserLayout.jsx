@@ -9,9 +9,13 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { MdNotificationsActive } from "react-icons/md";
+import useNotifications from "../../hooks/useNotifications";
 const UserLayout = () => {
   const { logoutUser } = useAuth();
   const redirect = useNavigate();
+  const [notifications] = useNotifications();
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const handleLogout = () => {
     logoutUser().then(() => {
@@ -23,6 +27,7 @@ const UserLayout = () => {
     });
   };
 
+  
   return (
     <div className="flex w-full font-2 text-white">
       {/* Side Content */}
@@ -33,6 +38,13 @@ const UserLayout = () => {
         >
           <RiHome9Fill />
           Home
+        </NavLink>
+        <NavLink
+          to="notifications"
+          className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+        >
+          <MdNotificationsActive />
+          Notifications({unreadCount > 0 ? unreadCount : 0})
         </NavLink>
         <NavLink
           to="userHome"
