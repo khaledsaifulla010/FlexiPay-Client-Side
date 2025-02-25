@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../../hooks/useAuth";
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const SendMoney = () => {
   const {
     register,
@@ -29,15 +30,38 @@ const SendMoney = () => {
   };
 
   const onSubmit = (data) => {
+    const amount = Number(data.amount);
+    if (amount < 50) {
+      toast.error("Minimum amount to send is 50!", {
+        position: "top-right",
+        theme: "colored",
+      });
+      return;
+    }
+
     const sendMoney = {
       sender: user?.displayName,
       mobileNumber: Number(data.mobileNumber),
-      amount: Number(data.amount),
+      amount: amount,
     };
 
-    axios.post("http://localhost:5000/sendMoney", sendMoney).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post("http://localhost:5000/sendMoney", sendMoney)
+      .then((res) => {
+        if (res.data.insertedId) {
+          reset();
+          toast.success("Send Money Successfully!", {
+            position: "top-right",
+            theme: "colored",
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error("Something Went Wrong!", {
+          position: "top-right",
+          theme: "colored",
+        });
+      });
   };
 
   const handleCancel = () => {
