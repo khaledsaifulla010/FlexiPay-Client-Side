@@ -5,13 +5,16 @@ const Notifications = () => {
   return (
     <div className="p-4 mt-12">
       {notifications.length > 0 ? (
-        <div className="grid grid-cols-3 gap-4">
-          {notifications.map((notification) => (
+        <div className="grid grid-cols-2 gap-4 ml-16">
+          {notifications.map((notification, idx) => (
             <div
               key={notification._id}
-              className="card w-[450px] bg-gray-700 shadow-sm p-4 rounded-lg"
+              className="card w-[500px] bg-gray-700 shadow-sm rounded-lg"
             >
               <div className="card-body">
+                <h1 className="-mt-4 -ml-4  border-2 py-1 font-bold text-lg w-10 h-10 rounded-full text-center">
+                  {idx + 1}
+                </h1>
                 <h2 className="text-xl font-bold text-center">
                   Received Amount: $ {notification.amount}
                 </h2>

@@ -52,8 +52,7 @@ const CashOut = () => {
     }
 
     // Added Transaction Fee //
-
-    const totalDeduction = amount * 1.5;
+    const totalDeduction = amount * 0.015;
 
     // We Check The Balance Sufficient //
     if (totalDeduction > newBalance) {
@@ -66,6 +65,7 @@ const CashOut = () => {
 
     const cashout = {
       senderId: users._id,
+      accountType: users.accountType,
       sender: user?.displayName,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
