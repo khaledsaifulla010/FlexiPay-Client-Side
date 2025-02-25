@@ -30,6 +30,16 @@ const SendMoney = () => {
   };
 
   const onSubmit = (data) => {
+    
+    // Generate Transaction ID Dynamically //
+    const transactionId = () =>
+      Array.from({ length: 10 }, () =>
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(
+          Math.floor(Math.random() * 62)
+        )
+      ).join("");
+
+    // Amount Validation //
     const amount = Number(data.amount);
     if (amount < 50) {
       toast.error("Minimum amount to send is 50!", {
@@ -43,6 +53,7 @@ const SendMoney = () => {
       sender: user?.displayName,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
+      transactionId: transactionId(),
     };
 
     axios
