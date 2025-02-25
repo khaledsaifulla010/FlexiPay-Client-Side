@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
-import { IoEye } from "react-icons/io5";
+import { IoEye, IoWallet } from "react-icons/io5";
 import useAuth from "../../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { useOutletContext } from "react-router-dom";
 const SendMoney = () => {
   const {
     register,
@@ -16,6 +17,7 @@ const SendMoney = () => {
   } = useForm();
 
   const { user } = useAuth();
+  const { balance, setBalance } = useOutletContext();
 
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
@@ -30,7 +32,6 @@ const SendMoney = () => {
   };
 
   const onSubmit = (data) => {
-    
     // Generate Transaction ID Dynamically //
     const transactionId = () =>
       Array.from({ length: 10 }, () =>
@@ -49,10 +50,26 @@ const SendMoney = () => {
       return;
     }
 
+    // Added Transaction Fee //
+
+    const transactionFee = amount > 100 ? 5 : 0;
+    const totalDeduction = amount + transactionFee;
+
+    // We Check The Balance Sufficient //
+
+    if (totalDeduction > balance) {
+      toast.error("Insufficient balance!", {
+        position: "top-right",
+        theme: "colored",
+      });
+      return;
+    }
+
     const sendMoney = {
       sender: user?.displayName,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
+      transactionFee: transactionFee,
       transactionId: transactionId(),
     };
 
@@ -60,6 +77,8 @@ const SendMoney = () => {
       .post("http://localhost:5000/sendMoney", sendMoney)
       .then((res) => {
         if (res.data.insertedId) {
+          // Show New Balance after Transaction //
+          setBalance((previousBalance) => previousBalance - totalDeduction);
           reset();
           toast.success("Send Money Successfully!", {
             position: "top-right",
@@ -126,6 +145,14 @@ const SendMoney = () => {
                   {errors.amount.message}
                 </p>
               )}
+            </div>
+
+            {/* Available Balance */}
+            <div>
+              <h1 className="font-bold text-lg flex items-center gap-2">
+                Available Balance : <IoWallet />
+                {balance} Tk{" "}
+              </h1>
             </div>
 
             {/* 5-Digit PIN */}
