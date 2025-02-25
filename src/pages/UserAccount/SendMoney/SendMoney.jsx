@@ -1,15 +1,20 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
+import useAuth from "../../../hooks/useAuth";
 
 const SendMoney = () => {
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
+
+  const { user } = useAuth();
 
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
@@ -24,7 +29,19 @@ const SendMoney = () => {
   };
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
+    const sendMoney = {
+      sender: user?.displayName,
+      mobileNumber: Number(data.mobileNumber),
+      amount: Number(data.amount),
+    };
+
+    axios.post("http://localhost:5000/sendMoney", sendMoney).then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  const handleCancel = () => {
+    reset();
   };
 
   return (
@@ -123,6 +140,7 @@ const SendMoney = () => {
             <div className="flex justify-between space-x-4">
               <button
                 type="button"
+                onClick={handleCancel}
                 className="text-lg font-bold p-2 border rounded-md bg-gray-400 text-white border-gray-400 w-1/2 cursor-pointer"
               >
                 Cancel
