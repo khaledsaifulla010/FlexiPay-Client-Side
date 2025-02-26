@@ -10,6 +10,8 @@ import Notifications from "../pages/UserAccount/Notifications/Notifications";
 import CashOut from "../pages/UserAccount/CashOut/CashOut";
 import AgentLayout from "../layout/AgentLayout/AgentLayout";
 import AgentHome from "../pages/AgentAccount/AgentHome/AgentHome";
+import AdminLayout from "../layout/AdminLayout/AdminLayout";
+import AdminHome from "../pages/AdminAccount/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // THIS IS USER LAYOUT //
   {
     path: "user",
     element: <UserLayout />,
@@ -52,6 +55,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // THIS IS AGENT LAYOUT //
   {
     path: "agent",
     element: <AgentLayout />,
@@ -59,6 +63,29 @@ const router = createBrowserRouter([
       {
         path: "agentHome",
         element: <AgentHome />,
+      },
+      // {
+      //   path: "sendMoney",
+      //   element: <SendMoney />,
+      // },
+      // {
+      //   path: "notifications",
+      //   element: <Notifications />,
+      // },
+      // {
+      //   path: "cashOut",
+      //   element: <CashOut />,
+      // },
+    ],
+  },
+  // THIS IS ADMIN LAYOUT //
+  {
+    path: "admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "adminHome",
+        element: <AdminHome />,
       },
       // {
       //   path: "sendMoney",

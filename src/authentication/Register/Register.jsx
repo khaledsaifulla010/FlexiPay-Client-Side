@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -14,6 +14,7 @@ const Register = () => {
   const [pin, setPin] = useState(["", "", "", "", ""]);
   const { createUser, updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const redirect = useNavigate();
   const {
     register,
     handleSubmit,
@@ -41,10 +42,9 @@ const Register = () => {
     // Create User //
     const newPin = "0" + data.pin;
     createUser(data.email, newPin).then((result) => {
+      redirect("/");
       const user = result.user;
-
       const balance = data.accountType === "User" ? 40 + newBalance : 100000;
-
       const newUser = {
         name: data.fullName,
         email: user.email,
