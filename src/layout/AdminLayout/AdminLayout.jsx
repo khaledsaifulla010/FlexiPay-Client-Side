@@ -1,5 +1,6 @@
 import {
   FaCircleRight,
+  FaCodePullRequest,
   FaUsers,
   // FaHandHoldingDollar,
   // FaMoneyBillTransfer,
@@ -37,21 +38,28 @@ const AdminLayout = () => {
         <div className="w-[350px] border border-red-500 min-h-screen space-y-8 bg-[#171717] py-12">
           <NavLink
             to="/admin/adminHome"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12"
           >
             <RiHome9Fill />
             Admin Home
           </NavLink>
           <NavLink
             to="/admin/allUsers"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12"
           >
             <FaUsers />
             All Users
           </NavLink>
           <NavLink
+            to="/admin/allRequestedAgent"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12"
+          >
+            <FaCodePullRequest />
+            Requested Agent
+          </NavLink>
+          <NavLink
             to="/admin/allTransactions"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12"
           >
             <IoBarChartSharp />
             All Transactions
@@ -87,7 +95,7 @@ const AdminLayout = () => {
             </NavLink> */}
           <button
             onClick={handleLogout}
-            className="flex items-center font-bold text-2xl gap-1.5 ml-16 cursor-pointer"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12 cursor-pointer"
           >
             <FaCircleRight />
             Sign Out

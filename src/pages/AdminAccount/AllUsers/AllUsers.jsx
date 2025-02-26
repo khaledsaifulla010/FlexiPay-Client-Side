@@ -7,7 +7,7 @@ const AllUsers = () => {
     <div className="container mx-auto p-4 text-center mt-12">
       <h2 className="text-4xl text-white font-bold mb-4">All Users</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-gray-400 shadow-md rounded-lg">
+        <table className="min-w-full bg-gray-300 shadow-md rounded-lg">
           <thead className="bg-gray-800 text-white font-bold text-xl">
             <tr>
               <th className="text-center py-3 px-4">SL/No.</th>

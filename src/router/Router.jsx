@@ -17,6 +17,7 @@ import MyTransaction from "../pages/UserAccount/MyTransaction/MyTransaction";
 import AgentTransaction from "../pages/AgentAccount/AgentTransaction/AgentTransaction";
 import AgentRequest from "../pages/AgentAccount/AgentRequest/AgentRequest";
 import AllTransactions from "../pages/AdminAccount/AllTransactions/AllTransactions";
+import AllRequestedAgent from "../pages/AdminAccount/AllRequestedAgent/AllRequestedAgent";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "allUsers",
         element: <AllUsers />,
+      },
+      {
+        path: "allRequestedAgent",
+        element: <AllRequestedAgent/>,
       },
       {
         path: "allTransactions",
