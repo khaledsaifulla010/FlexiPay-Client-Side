@@ -9,6 +9,8 @@ const CashRequest = () => {
 
   const cashRequestData = {
     name: users?.name,
+    agentId: users?._id,
+    agentBalance: users.myBalance,
     mobileNumber: users?.mobileNumber,
     email: users?.email,
     nid: users?.nid,
@@ -38,6 +40,9 @@ const CashRequest = () => {
           Email : {users?.email}
         </h1>
         <h1 className="font-bold text-2xl text-center ">NID : {users?.nid}</h1>
+        <h1 className="font-bold text-2xl text-center ">
+          Available Balance : {users?.myBalance} TK
+        </h1>
         <button
           onClick={handleCashRequest}
           className="p-2 border rounded-md  w-[80%] ml-12 bg-cyan-800 font-bold border-cyan-600 flex items-center justify-center gap-1.5 cursor-pointer text-xl"

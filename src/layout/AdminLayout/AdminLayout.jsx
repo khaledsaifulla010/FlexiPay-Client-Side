@@ -72,35 +72,6 @@ const AdminLayout = () => {
             <IoBarChartSharp />
             All Transactions
           </NavLink>
-          {/* <NavLink
-              to="notifications"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <MdNotificationsActive />
-              Notifications({unreadCount > 0 ? unreadCount : 0})
-            </NavLink>
-
-            <NavLink
-              to="sendMoney"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <FaMoneyBillTransfer />
-              Send Money
-            </NavLink>
-            <NavLink
-              to="userHome"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <TbFolderDollar />
-              Cash In
-            </NavLink>
-            <NavLink
-              to="cashOut"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <FaHandHoldingDollar />
-              Cash Out
-            </NavLink> */}
           <button
             onClick={handleLogout}
             className="flex items-center font-bold text-2xl gap-1.5 ml-12 cursor-pointer"
