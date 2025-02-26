@@ -62,13 +62,16 @@ const SendMoney = () => {
       });
       return;
     }
+    const senderMobileNumber = users?.mobileNumber;
 
     const sendMoney = {
       senderId: users._id,
       sender: user?.displayName,
+      senderMobileNumber: senderMobileNumber,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
       transactionId: transactionId(),
+      transferType: "Send Money",
       date: new Date(),
     };
 

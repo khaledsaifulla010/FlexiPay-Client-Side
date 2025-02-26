@@ -63,13 +63,17 @@ const CashOut = () => {
       return;
     }
 
+    const senderMobileNumber = users?.mobileNumber;
+
     const cashout = {
       senderId: users._id,
       accountType: users.accountType,
       sender: user?.displayName,
+      senderMobileNumber: senderMobileNumber,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
       transactionId: transactionId(),
+      transferType: "Cashout",
       date: new Date(),
     };
     axios

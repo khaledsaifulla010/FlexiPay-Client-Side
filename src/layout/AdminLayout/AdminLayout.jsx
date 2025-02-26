@@ -1,5 +1,6 @@
 import {
   FaCircleRight,
+  FaUsers,
   // FaHandHoldingDollar,
   // FaMoneyBillTransfer,
 } from "react-icons/fa6";
@@ -39,6 +40,13 @@ const AdminLayout = () => {
           >
             <RiHome9Fill />
             Admin Home
+          </NavLink>
+          <NavLink
+            to="/admin/allUsers"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+          >
+            <FaUsers />
+            All Users
           </NavLink>
           {/* <NavLink
               to="notifications"

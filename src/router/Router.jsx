@@ -12,6 +12,9 @@ import AgentLayout from "../layout/AgentLayout/AgentLayout";
 import AgentHome from "../pages/AgentAccount/AgentHome/AgentHome";
 import AdminLayout from "../layout/AdminLayout/AdminLayout";
 import AdminHome from "../pages/AdminAccount/AdminHome/AdminHome";
+import AllUsers from "../pages/AdminAccount/AllUsers/AllUsers";
+import MyTransaction from "../pages/UserAccount/MyTransaction/MyTransaction";
+import AgentTransaction from "../pages/AgentAccount/AgentTransaction/AgentTransaction";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
         path: "cashOut",
         element: <CashOut />,
       },
+      {
+        path: "myTransaction",
+        element: <MyTransaction />,
+      },
     ],
   },
   // THIS IS AGENT LAYOUT //
@@ -63,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "agentHome",
         element: <AgentHome />,
+      },
+      {
+        path: "agentTransaction",
+        element: <AgentTransaction />,
       },
       // {
       //   path: "sendMoney",
@@ -87,6 +98,11 @@ const router = createBrowserRouter([
         path: "adminHome",
         element: <AdminHome />,
       },
+      {
+        path: "allUsers",
+        element: <AllUsers />,
+      },
+
       // {
       //   path: "sendMoney",
       //   element: <SendMoney />,

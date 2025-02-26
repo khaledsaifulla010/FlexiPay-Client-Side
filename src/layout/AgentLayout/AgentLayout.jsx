@@ -9,6 +9,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { TbTransactionDollar } from "react-icons/tb";
 // import { MdNotificationsActive } from "react-icons/md";
 // import useNotifications from "../../hooks/useNotifications";
 
@@ -39,6 +40,13 @@ const AgentLayout = () => {
           >
             <RiHome9Fill />
             Home
+          </NavLink>
+          <NavLink
+            to="/agent/agentTransaction"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+          >
+            <TbTransactionDollar />
+            Transactions
           </NavLink>
           {/* <NavLink
               to="notifications"

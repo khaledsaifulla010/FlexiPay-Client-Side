@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { MdNotificationsActive } from "react-icons/md";
 import useNotifications from "../../hooks/useNotifications";
 import useUser from "../../hooks/useUser";
+import { TbTransactionDollar } from "react-icons/tb";
 const UserLayout = () => {
   const { logoutUser } = useAuth();
   const [users] = useUser();
@@ -43,7 +44,7 @@ const UserLayout = () => {
               Home
             </NavLink>
             <NavLink
-              to="notifications"
+              to="/user/notifications"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"
             >
               <MdNotificationsActive />
@@ -51,18 +52,25 @@ const UserLayout = () => {
             </NavLink>
 
             <NavLink
-              to="sendMoney"
+              to="/user/sendMoney"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"
             >
               <FaMoneyBillTransfer />
               Send Money
             </NavLink>
             <NavLink
-              to="cashOut"
+              to="/user/cashOut"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"
             >
               <FaHandHoldingDollar />
               Cash Out
+            </NavLink>
+            <NavLink
+              to="/user/myTransaction"
+              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+            >
+              <TbTransactionDollar />
+              Transactions
             </NavLink>
             <button
               onClick={handleLogout}
