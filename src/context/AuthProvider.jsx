@@ -8,6 +8,7 @@ import {
 import AuthContext from "./AuthContext";
 import auth from "../firebase/firebase.config";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -36,8 +37,31 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
       console.log("Logged in User", currentUser);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+        axios
+          .post("https://flexi-pay-server-side.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            setLoading(false);
+            console.log(res.data);
+          });
+      } else {
+        axios
+          .post(
+            "https://flexi-pay-server-side.vercel.app/logout",
+            { user },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            setLoading(false);
+            console.log("Logout", res.data);
+          });
+      }
     });
     return () => {
       unSubscribe;

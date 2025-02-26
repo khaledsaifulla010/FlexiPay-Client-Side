@@ -92,7 +92,7 @@ const AdminHome = () => {
         </div>
       </div>
       <div className="border w-[500px] h-[300px] mx-auto mt-12  rounded-md">
-        <h1 className="text-xl font-bold text-center bg-purple-500 w-16 rounded-r-md">
+        <h1 className="text-xl font-bold text-center bg-red-700 w-16 rounded-r-md">
           {users.accountType}
         </h1>
         <h1 className="text-4xl font-bold text-center space-y-2 mt-4">
