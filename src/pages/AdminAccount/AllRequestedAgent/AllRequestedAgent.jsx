@@ -1,9 +1,42 @@
 import { VscVerifiedFilled } from "react-icons/vsc";
 import useAllRequestedAgent from "../../../hooks/useAllRequestedAgent";
 import { ImCross } from "react-icons/im";
-
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const AllRequestedAgent = () => {
-  const [allRequestedAgent] = useAllRequestedAgent();
+  const [allRequestedAgent, refetch] = useAllRequestedAgent();
+  const axiosSecure = useAxiosSecure();
+
+  // Status Accept //
+  const handleRequestAccept = async (id) => {
+    const response = await axiosSecure.put(`/requestedAgent/${id}`, {
+      status: "Accepted",
+    });
+    if (response.data.modifiedCount > 0) {
+      refetch();
+      toast.success("Agent Request Accepted Successfully!", {
+        position: "top-right",
+        theme: "colored",
+        style: { width: "350px" },
+      });
+    }
+  };
+
+  // Status Reject //
+  const handleRequestReject = async (id) => {
+    const response = await axiosSecure.put(`/requestedAgent/${id}`, {
+      status: "Rejected",
+    });
+    if (response.data.modifiedCount > 0) {
+      refetch();
+      toast.success("Agent Request Rejected Successfully!", {
+        position: "top-right",
+        theme: "colored",
+        style: { width: "350px", backgroundColor: "red", color: "#FFFFFF" },
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto p-4 text-center mt-12">
@@ -42,16 +75,25 @@ const AllRequestedAgent = () => {
                 <td className="py-3 px-4 font-bold text-indigo-800">
                   {agent.nid}
                 </td>
-                <td className="py-3 px-4 font-bold text-yellow-600">
+                <td
+                  className={`py-3 px-4 font-bold ${
+                    agent.status === "Pending"
+                      ? "text-orange-600"
+                      : agent.status === "Accepted"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
                   {agent.status}
                 </td>
+
                 <td className="py-3 px-4 flex justify-center space-x-2">
-                  <button>
+                  <button onClick={() => handleRequestAccept(agent._id)}>
                     <VscVerifiedFilled className="text-3xl text-green-600 cursor-pointer" />
                   </button>
                 </td>
                 <td>
-                  <button>
+                  <button onClick={() => handleRequestReject(agent._id)}>
                     <ImCross className="text-xl text-red-600 cursor-pointer" />
                   </button>
                 </td>
