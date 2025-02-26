@@ -208,7 +208,7 @@ const CashOut = () => {
               </button>
               <button
                 type="submit"
-                className="text-lg font-bold p-2 border rounded-md bg-purple-600 text-white border-purple-600 w-1/2 cursor-pointer"
+                className="text-lg font-bold p-2 border rounded-md bg-red-600 text-white border-red-600 w-1/2 cursor-pointer"
               >
                 Send
               </button>

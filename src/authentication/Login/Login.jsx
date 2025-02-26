@@ -10,7 +10,7 @@ const Login = () => {
   const [pin, setPin] = useState(["", "", "", "", ""]);
   const [showPin, setShowPin] = useState(false);
   const { loginUser } = useAuth();
-   const redirect = useNavigate();
+  const redirect = useNavigate();
 
   const {
     register,
@@ -33,12 +33,12 @@ const Login = () => {
     const newPin = "0" + data.pin;
     loginUser(data.email, newPin)
       .then((result) => {
-        redirect("/user/userHome");
+        redirect("/");
+
         toast.success("Login Successfully", {
           position: "top-right",
           theme: "colored",
         });
-        
       })
       .catch((error) => {
         toast.error("Something Went Wrong!", {
