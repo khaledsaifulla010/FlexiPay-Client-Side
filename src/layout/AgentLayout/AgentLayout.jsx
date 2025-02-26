@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { TbTransactionDollar } from "react-icons/tb";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { BsCashCoin } from "react-icons/bs";
 // import { MdNotificationsActive } from "react-icons/md";
 // import useNotifications from "../../hooks/useNotifications";
 
@@ -43,19 +44,27 @@ const AgentLayout = () => {
             Home
           </NavLink>
           <NavLink
-            to="/agent/agentTransaction"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-          >
-            <TbTransactionDollar />
-            Transactions
-          </NavLink>
-          <NavLink
             to="/agent/agentRequest"
             className="flex items-center font-bold text-2xl gap-1.5 ml-20"
           >
             <VscGitPullRequestGoToChanges />
             Be An Agent
           </NavLink>
+          <NavLink
+            to="/agent/agentCashRequest"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+          >
+            <BsCashCoin className="mt-2" />
+            Cash Request
+          </NavLink>
+          <NavLink
+            to="/agent/agentTransaction"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+          >
+            <TbTransactionDollar />
+            Transactions
+          </NavLink>
+
           {/* <NavLink
               to="notifications"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"

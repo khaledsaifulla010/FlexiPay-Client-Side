@@ -1,4 +1,5 @@
 import {
+  FaCashRegister,
   FaCircleRight,
   FaCodePullRequest,
   FaUsers,
@@ -56,6 +57,13 @@ const AdminLayout = () => {
           >
             <FaCodePullRequest />
             Requested Agent
+          </NavLink>
+          <NavLink
+            to="/admin/cashRequest"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-12"
+          >
+            <FaCashRegister />
+            Cash Request
           </NavLink>
           <NavLink
             to="/admin/allTransactions"
