@@ -10,6 +10,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { IoBarChartSharp } from "react-icons/io5";
 // import { MdNotificationsActive } from "react-icons/md";
 // import useNotifications from "../../hooks/useNotifications";
 
@@ -36,17 +37,24 @@ const AdminLayout = () => {
         <div className="w-[350px] border border-red-500 min-h-screen space-y-8 bg-[#171717] py-12">
           <NavLink
             to="/admin/adminHome"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
           >
             <RiHome9Fill />
             Admin Home
           </NavLink>
           <NavLink
             to="/admin/allUsers"
-            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
           >
             <FaUsers />
             All Users
+          </NavLink>
+          <NavLink
+            to="/admin/allTransactions"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-16"
+          >
+            <IoBarChartSharp />
+            All Transactions
           </NavLink>
           {/* <NavLink
               to="notifications"
@@ -79,7 +87,7 @@ const AdminLayout = () => {
             </NavLink> */}
           <button
             onClick={handleLogout}
-            className="flex items-center font-bold text-2xl gap-1.5 ml-20 cursor-pointer"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-16 cursor-pointer"
           >
             <FaCircleRight />
             Sign Out

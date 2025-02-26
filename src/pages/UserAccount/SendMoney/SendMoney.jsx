@@ -67,6 +67,7 @@ const SendMoney = () => {
     const sendMoney = {
       senderId: users._id,
       sender: user?.displayName,
+      accountType: users.accountType,
       senderMobileNumber: senderMobileNumber,
       mobileNumber: Number(data.mobileNumber),
       amount: amount,
