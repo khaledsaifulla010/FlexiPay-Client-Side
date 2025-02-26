@@ -36,7 +36,7 @@ const UserLayout = () => {
           {/* Side Content */}
           <div className="w-[350px] border border-red-500 min-h-screen space-y-8 bg-[#171717] py-12">
             <NavLink
-              to="userHome"
+              to="/user/userHome"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"
             >
               <RiHome9Fill />

@@ -1,3 +1,4 @@
+import useAccountUser from "../../hooks/useAccountUser";
 import useAgent from "../../hooks/useAgent";
 import AdminLayout from "../../layout/AdminLayout/AdminLayout";
 import AgentLayout from "../../layout/AgentLayout/AgentLayout";
@@ -7,7 +8,7 @@ import WithoutLoginHome from "../WithoutLoginHome/WithoutLoginHome";
 const Home = () => {
   const isAdmin = false;
   const [isAgent] = useAgent();
-  const isUser = false;
+  const [isUser] = useAccountUser();
 
   return (
     <div>
