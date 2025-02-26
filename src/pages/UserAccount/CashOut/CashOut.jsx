@@ -77,7 +77,7 @@ const CashOut = () => {
       date: new Date(),
     };
     axios
-      .post("http://localhost:5000/cashout", cashout)
+      .post("https://flexi-pay-server-side.vercel.app/cashout", cashout)
       .then((res) => {
         if (res.data.success) {
           refetch();

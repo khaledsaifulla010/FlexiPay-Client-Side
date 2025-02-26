@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye, IoWallet } from "react-icons/io5";
-import useAuth from "../../../hooks/useAuth";
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import useUser from "../../../hooks/useUser";
-const SendMoney = () => {
+import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
+
+const CashIn = () => {
   const {
     register,
     handleSubmit,
@@ -15,12 +15,12 @@ const SendMoney = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { user } = useAuth();
-  const [users, refetch] = useUser();
-  const newBalance = users.myBalance;
 
   const [showPin, setShowPin] = useState(false);
   const [pin, setPin] = useState(["", "", "", "", ""]);
+  const { user } = useAuth();
+  const [users, refetch] = useUser();
+  const newBalance = Number(users.myBalance);
 
   const handlePinChange = (index, value) => {
     if (!isNaN(value) && value.length <= 1) {
@@ -40,22 +40,8 @@ const SendMoney = () => {
         )
       ).join("");
 
-    // Amount Validation //
-    const amount = Number(data.amount);
-    if (amount < 50) {
-      toast.error("Minimum amount to send is 50!", {
-        position: "top-right",
-        theme: "colored",
-      });
-      return;
-    }
-
-    // Added Transaction Fee //
-    const transactionFee = amount > 100 ? 5 : 0;
-    const totalDeduction = amount + transactionFee;
-
     // We Check The Balance Sufficient //
-    if (totalDeduction > newBalance) {
+    if (data.amount > newBalance) {
       toast.error("Insufficient balance!", {
         position: "top-right",
         theme: "colored",
@@ -64,20 +50,21 @@ const SendMoney = () => {
     }
     const senderMobileNumber = users?.mobileNumber;
 
-    const sendMoney = {
+    const cashIn = {
       senderId: users._id,
       sender: user?.displayName,
       accountType: users.accountType,
       senderMobileNumber: senderMobileNumber,
       mobileNumber: Number(data.mobileNumber),
-      amount: amount,
+      amount: Number(data.amount),
       transactionId: transactionId(),
-      transferType: "Send Money",
+      transferType: "Cash In",
       date: new Date(),
     };
+    console.log(cashIn);
 
     axios
-      .post("https://flexi-pay-server-side.vercel.app/sendMoney", sendMoney)
+      .post("https://flexi-pay-server-side.vercel.app/cashIn", cashIn)
       .then((res) => {
         if (res.data.success) {
           refetch();
@@ -104,8 +91,8 @@ const SendMoney = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center ">
-        <h1 className="mt-24 text-5xl font-bold text-center">Send Money</h1>
+      <div className="flex flex-col items-center">
+        <h1 className="mt-24 text-5xl font-bold text-center">Cash In</h1>
 
         <div className="w-[500px] mt-12 border border-slate-300 px-6 py-10 rounded-xl shadow-lg">
           <form
@@ -151,14 +138,6 @@ const SendMoney = () => {
               )}
             </div>
 
-            {/* Available Balance */}
-            <div>
-              <h1 className="font-bold text-lg flex items-center gap-2">
-                Available Balance : <IoWallet />
-                {newBalance} Tk{" "}
-              </h1>
-            </div>
-
             {/* 5-Digit PIN */}
             <div className="form-control">
               <label className="label font-bold">
@@ -201,6 +180,13 @@ const SendMoney = () => {
                 </p>
               )}
             </div>
+            {/* Available Balance */}
+            <div>
+              <h1 className="font-bold text-lg flex items-center gap-2">
+                Available Balance : <IoWallet />
+                {newBalance} Tk{" "}
+              </h1>
+            </div>
 
             {/* Buttons */}
             <div className="flex justify-between space-x-4">
@@ -213,7 +199,7 @@ const SendMoney = () => {
               </button>
               <button
                 type="submit"
-                className="text-lg font-bold p-2 border rounded-md bg-purple-600 text-white border-purple-600 w-1/2 cursor-pointer"
+                className="text-lg font-bold p-2 border rounded-md bg-red-600 text-white border-red-600 w-1/2 cursor-pointer"
               >
                 Send
               </button>
@@ -225,4 +211,4 @@ const SendMoney = () => {
   );
 };
 
-export default SendMoney;
+export default CashIn;

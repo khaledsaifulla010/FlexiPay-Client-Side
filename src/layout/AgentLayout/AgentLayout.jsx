@@ -1,5 +1,6 @@
 import {
   FaCircleRight,
+  FaMoneyBillTrendUp,
   // FaHandHoldingDollar,
   // FaMoneyBillTransfer,
 } from "react-icons/fa6";
@@ -44,12 +45,20 @@ const AgentLayout = () => {
             Home
           </NavLink>
           <NavLink
+            to="/agent/cashIn"
+            className="flex items-center font-bold text-2xl gap-1.5 ml-20"
+          >
+            <FaMoneyBillTrendUp />
+            Cash In
+          </NavLink>
+          <NavLink
             to="/agent/agentRequest"
             className="flex items-center font-bold text-2xl gap-1.5 ml-20"
           >
             <VscGitPullRequestGoToChanges />
             Be An Agent
           </NavLink>
+
           <NavLink
             to="/agent/agentCashRequest"
             className="flex items-center font-bold text-2xl gap-1.5 ml-20"
