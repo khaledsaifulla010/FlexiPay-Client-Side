@@ -1,11 +1,9 @@
 import {
   FaCircleRight,
   FaMoneyBillTrendUp,
-  // FaHandHoldingDollar,
-  // FaMoneyBillTransfer,
+ 
 } from "react-icons/fa6";
 import { RiHome9Fill } from "react-icons/ri";
-// import { TbFolderDollar } from "react-icons/tb";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,15 +11,15 @@ import { toast } from "react-toastify";
 import { TbTransactionDollar } from "react-icons/tb";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { BsCashCoin } from "react-icons/bs";
-// import { MdNotificationsActive } from "react-icons/md";
-// import useNotifications from "../../hooks/useNotifications";
+import { MdNotificationsActive } from "react-icons/md";
+import useNotifications from "../../hooks/useNotifications";
 
 const AgentLayout = () => {
   const { logoutUser } = useAuth();
 
   const redirect = useNavigate();
-  // const [notifications] = useNotifications();
-  // const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const [notifications] = useNotifications();
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const handleLogout = () => {
     logoutUser().then(() => {
@@ -74,7 +72,7 @@ const AgentLayout = () => {
             Transactions
           </NavLink>
 
-          {/* <NavLink
+          <NavLink
               to="notifications"
               className="flex items-center font-bold text-2xl gap-1.5 ml-20"
             >
@@ -82,27 +80,6 @@ const AgentLayout = () => {
               Notifications({unreadCount > 0 ? unreadCount : 0})
             </NavLink>
 
-            <NavLink
-              to="sendMoney"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <FaMoneyBillTransfer />
-              Send Money
-            </NavLink>
-            <NavLink
-              to="userHome"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <TbFolderDollar />
-              Cash In
-            </NavLink>
-            <NavLink
-              to="cashOut"
-              className="flex items-center font-bold text-2xl gap-1.5 ml-20"
-            >
-              <FaHandHoldingDollar />
-              Cash Out
-            </NavLink> */}
           <button
             onClick={handleLogout}
             className="flex items-center font-bold text-2xl gap-1.5 ml-20 cursor-pointer"

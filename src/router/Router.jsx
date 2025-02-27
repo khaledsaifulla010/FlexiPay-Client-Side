@@ -93,18 +93,11 @@ const router = createBrowserRouter([
         path: "cashIn",
         element: <CashIn />,
       },
-      // {
-      //   path: "sendMoney",
-      //   element: <SendMoney />,
-      // },
-      // {
-      //   path: "notifications",
-      //   element: <Notifications />,
-      // },
-      // {
-      //   path: "cashOut",
-      //   element: <CashOut />,
-      // },
+
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
     ],
   },
   // THIS IS ADMIN LAYOUT //
@@ -132,10 +125,6 @@ const router = createBrowserRouter([
         path: "cashRequest",
         element: <AllCashRequest />,
       },
-      // {
-      //   path: "notifications",
-      //   element: <Notifications />,
-      // },
     ],
   },
 ]);

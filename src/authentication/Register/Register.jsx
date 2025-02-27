@@ -199,6 +199,7 @@ const Register = () => {
                 className="select select-bordered w-full"
               >
                 <option value="">Select Account Type</option>
+                <option value="Admin">Admin</option>
                 <option value="Agent">Agent</option>
                 <option value="User">User</option>
               </select>
